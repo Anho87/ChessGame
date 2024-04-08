@@ -1,10 +1,8 @@
-package PiecesFactory;
+package PieceFactory;
 
-public class King extends Piece{
-    
-    private PieceType pieceType = PieceType.KING;
-    
-    
+public class Knight extends Piece{
+
+    private PieceType pieceType = PieceType.KNIGHT;
     @Override
     public int verticalMovement() {
         return 0;
@@ -14,7 +12,6 @@ public class King extends Piece{
     public int horizontalMovement() {
         return 0;
     }
-
     @Override
     PieceType pieceType() {
         return pieceType;

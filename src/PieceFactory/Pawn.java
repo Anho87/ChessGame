@@ -1,4 +1,4 @@
-package PiecesFactory;
+package PieceFactory;
 
 public class Pawn extends Piece{
 

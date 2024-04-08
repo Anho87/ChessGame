@@ -1,8 +1,8 @@
-package PiecesFactory;
+package PieceFactory;
 
-public class Knight extends Piece{
+public class Bishop extends Piece{
 
-    private PieceType pieceType = PieceType.KNIGHT;
+    private PieceType pieceType = PieceType.BISHOP;
     @Override
     public int verticalMovement() {
         return 0;

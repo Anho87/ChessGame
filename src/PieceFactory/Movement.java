@@ -1,4 +1,4 @@
-package PiecesFactory;
+package PieceFactory;
 
 public interface Movement {
     

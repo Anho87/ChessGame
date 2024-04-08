@@ -1,4 +1,4 @@
-package PiecesFactory;
+package PieceFactory;
 
 public abstract class Piece implements Movement{
     

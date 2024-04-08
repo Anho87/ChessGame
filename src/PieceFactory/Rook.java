@@ -1,8 +1,8 @@
-package PiecesFactory;
+package PieceFactory;
 
-public class Queen extends Piece{
+public class Rook extends Piece{
 
-    private PieceType pieceType = PieceType.QUEEN;
+    private PieceType pieceType = PieceType.ROOK;
     @Override
     public int verticalMovement() {
         return 0;
