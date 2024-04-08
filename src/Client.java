@@ -37,16 +37,21 @@ public class Client extends JFrame implements ActionListener {
         while (true){
             fromServer = in.readLine();
             if (fromServer.equalsIgnoreCase("waiting")){
+                System.out.println("waiting");
                 for (JButton button : bp.buttonList) {
                     button.setEnabled(false);
+                    button.setDisabledIcon(button.getIcon());
                 }
             } else if (fromServer.equalsIgnoreCase("active")) {
+                System.out.println("active");
                 for (JButton button : bp.buttonList) {
                     button.setEnabled(true);
                 }
             } else if (fromServer.equalsIgnoreCase("ready")) {
+                System.out.println("player ready");
                 outToServer.println("Player ready");
             } else if (fromServer.equalsIgnoreCase("player move")) {
+                System.out.println("player move");
                 bp.movePiece(in.readLine());
             }
         }
@@ -76,14 +81,15 @@ public class Client extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         JButton clickedButton = (JButton) e.getSource();
-
+       
         if (sourceButton == null) {
-            if (!clickedButton.getText().isEmpty()) {
+            if (clickedButton.getIcon() != null) {
                 sourceButton = clickedButton;
             }
         } else {
             indexOfFirstClickedButton = buttonList.indexOf(clickedButton);
             indexOfSecondClickedButton = buttonList.indexOf(sourceButton);
+            System.out.println(indexOfFirstClickedButton + " " + indexOfSecondClickedButton);
             bp.movePiece(indexOfFirstClickedButton + " " + indexOfSecondClickedButton);
             outToServer.println(indexOfFirstClickedButton + " " + indexOfSecondClickedButton);
             sourceButton = null;

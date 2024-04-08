@@ -1,5 +1,7 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.MulticastSocket;
@@ -12,8 +14,9 @@ public class BoardPanel {
     ArrayList<JButton> buttonList;
     Color lightBrown = new Color(102, 51, 0);
     Color darkBrown = new Color(153, 102, 0);
-    MulticastSocket so;
 
+    private static final int DESIRED_WIDTH = 50;
+    private static final int DESIRED_HEIGHT = 50;
     String whiteKing = "<html><font size='10'>\u2654</font></html>";
     String whiteQueen = "<html><font size='10'>\u2655</font></html>";
     String whiteRook = "<html><font size='10'>\u2656</font></html>";
@@ -68,28 +71,48 @@ public class BoardPanel {
         if (parts.length >= 2) {
             String firstPart = parts[0];
             String secondPart = parts[1];
-            int firstButtonIndex = Integer.parseInt(firstPart);
-            int secondButtonIndex = Integer.parseInt(secondPart);
-            buttonList.get(firstButtonIndex).setText(buttonList.get(secondButtonIndex).getText());
-            buttonList.get(secondButtonIndex).setText("");
+            int targetLocation = Integer.parseInt(firstPart);
+            int currentLocation = Integer.parseInt(secondPart);
+            
+            Icon icon = buttonList.get(currentLocation).getIcon();
+            buttonList.get(targetLocation).setIcon(icon);
+            buttonList.get(currentLocation).setIcon(null);
+//            buttonList.get(targetLocation).setIcon(sourceIcon);
+//            buttonList.get(currentLocation).setIcon(null);
+//            buttonList.get(targetLocation).setText(buttonList.get(currentLocation).getText());
+//            buttonList.get(currentLocation).setText("");
         } else if (movePieces.equalsIgnoreCase("NewGame")) {
             setStartingPositions();
         }
     }
     public void setStartingPositions() {
-        String[] blackPieces = {blackRook, blackKnight, blackBishop, blackKing, blackQueen, blackBishop, blackKnight, blackRook};
-        String[] whitePieces = {whiteRook, whiteKnight, whiteBishop, whiteKing, whiteQueen, whiteBishop, whiteKnight, whiteRook};
-        String[] pawns = {blackPawn, whitePawn};
+        String[] blackPieces = {"src/images/b_rook.png", "src/images/b_knight.png", "src/images/b_bishop.png", "src/images/b_king.png", "src/images/b_queen.png", "src/images/b_bishop.png", "src/images/b_knight.png", "src/images/b_rook.png"};
+        String[] whitePieces = {"src/images/w_rook.png", "src/images/w_knight.png", "src/images/w_bishop.png", "src/images/w_king.png", "src/images/w_queen.png", "src/images/w_bishop.png", "src/images/w_knight.png", "src/images/w_rook.png"};
+        String[] pawns = {"src/images/b_pawn.png", "src/images/w_pawn.png"};
 
-        for (int i = 0; i < 8; i++) {
-            buttonList.get(i).setText(blackPieces[i]);
-            buttonList.get(i + 56).setText(whitePieces[i]);
-        }
+        try {
+            for (int i = 0; i < 8; i++) {
+                ImageIcon blackIcon = scaleImageIcon(new ImageIcon(ImageIO.read(new File(blackPieces[i]))));
+                ImageIcon whiteIcon = scaleImageIcon(new ImageIcon(ImageIO.read(new File(whitePieces[i]))));
+                buttonList.get(i).setIcon(whiteIcon);
+                buttonList.get(i + 56).setIcon(blackIcon);
+            }
 
-        for (int i = 8; i < 16; i++) {
-            buttonList.get(i).setText(pawns[0]);
-            buttonList.get(i + 40).setText(pawns[1]);
+            for (int i = 8; i < 16; i++) {
+                ImageIcon blackPawnIcon = scaleImageIcon(new ImageIcon(ImageIO.read(new File(pawns[0]))));
+                ImageIcon whitePawnIcon = scaleImageIcon(new ImageIcon(ImageIO.read(new File(pawns[1]))));
+                buttonList.get(i).setIcon(whitePawnIcon);
+                buttonList.get(i + 40).setIcon(blackPawnIcon);
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
+    }
+
+    private ImageIcon scaleImageIcon(ImageIcon icon) {
+        Image img = icon.getImage();
+        Image scaledImg = img.getScaledInstance(DESIRED_WIDTH, DESIRED_HEIGHT, Image.SCALE_SMOOTH);
+        return new ImageIcon(scaledImg);
     }
 }
 

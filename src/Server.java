@@ -48,12 +48,12 @@ public class Server extends Thread{
 
         while (gameActive) {
             if (round % 2 == 0){
-                System.out.println(round);
+                System.out.println("Round nr " + round + " player 1's turn");
                 outPlayer1.println("active");
                 outPlayer2.println("waiting");
                 try {
                     String playerMove = inPlayer1.readLine();
-//                    System.out.println(playerMove);
+                    System.out.println(playerMove);
                     outPlayer2.println("player move");
                     outPlayer2.println(playerMove);
                     round++;
@@ -61,12 +61,12 @@ public class Server extends Thread{
                     throw new RuntimeException(e);
                 }
             }else{
-                System.out.println(round);
+                System.out.println("Round nr " + round+ " player 2's turn");
                 outPlayer2.println("active");
                 outPlayer1.println("waiting");
                 try {
                     String playerMove = inPlayer2.readLine();
-//                    System.out.println(playerMove);
+                    System.out.println(playerMove);
                     outPlayer1.println("player move");
                     outPlayer1.println(playerMove);
                     round++;
