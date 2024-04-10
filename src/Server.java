@@ -35,7 +35,9 @@ public class Server extends Thread{
     public void run() {
         ArrayList<String> readyPlayerList = new ArrayList<>();
         outPlayer1.println("ready");
+        outPlayer1.println("White Player");
         outPlayer2.println("ready");
+        outPlayer2.println("Black Player");
         try {
             readyPlayerList.add(inPlayer1.readLine());
             readyPlayerList.add(inPlayer2.readLine());
@@ -48,32 +50,26 @@ public class Server extends Thread{
 
         while (gameActive) {
             if (round % 2 == 0){
-                System.out.println("Round nr " + round + " player 1's turn");
-                outPlayer1.println("active");
-                outPlayer2.println("waiting");
-                try {
-                    String playerMove = inPlayer1.readLine();
-                    System.out.println(playerMove);
-                    outPlayer2.println("player move");
-                    outPlayer2.println(playerMove);
-                    round++;
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+                System.out.println("Round nr " + round + " white players turn");
+                turn(outPlayer1,inPlayer1,outPlayer2,inPlayer2);
             }else{
-                System.out.println("Round nr " + round+ " player 2's turn");
-                outPlayer2.println("active");
-                outPlayer1.println("waiting");
-                try {
-                    String playerMove = inPlayer2.readLine();
-                    System.out.println(playerMove);
-                    outPlayer1.println("player move");
-                    outPlayer1.println(playerMove);
-                    round++;
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+                System.out.println("Round nr " + round+ " black players turn");
+                turn(outPlayer2,inPlayer2,outPlayer1,inPlayer1);
             }
+        }
+    }
+    
+    public void turn(PrintWriter activePlayerWriter, BufferedReader activePlayerReader, PrintWriter waitingPlayerWriter, BufferedReader waitingPlayerReader){
+        activePlayerWriter.println("active");
+        waitingPlayerWriter.println("waiting");
+        try {
+            String playerMove = activePlayerReader.readLine();
+            System.out.println(playerMove);
+            waitingPlayerWriter.println("player move");
+            waitingPlayerWriter.println(playerMove);
+            round++;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 }

@@ -4,8 +4,33 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="61a5c2bb-6518-4029-b471-97904a6e4c74" name="Changes" comment="added classes and images for pieces">
+    <list default="true" id="61a5c2bb-6518-4029-b471-97904a6e4c74" name="Changes" comment="changed name of folder">
+      <change afterPath="$PROJECT_DIR$/src/PieceFactory/PieceFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BoardPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BoardPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PieceFactory/Bishop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PieceFactory/Bishop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PieceFactory/Color.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PieceFactory/Color.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PieceFactory/King.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PieceFactory/King.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PieceFactory/Knight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PieceFactory/Knight.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PieceFactory/Movement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PieceFactory/Movement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PieceFactory/Pawn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PieceFactory/Pawn.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PieceFactory/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PieceFactory/Piece.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PieceFactory/Queen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PieceFactory/Queen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PieceFactory/Rook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PieceFactory/Rook.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/images/b_bishop.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/images/b_king.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/images/b_knight.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/images/b_pawn.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/images/b_queen.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/images/b_rook.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/images/w_bishop.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/images/w_king.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/images/w_knight.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/images/w_pawn.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/images/w_queen.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/images/w_rook.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,9 +40,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Class" />
         <option value="Enum" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -44,6 +69,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -83,6 +109,12 @@
       <updated>1712576911631</updated>
       <workItem from="1712576912699" duration="5912000" />
       <workItem from="1712582891530" duration="102000" />
+      <workItem from="1712600973228" duration="6570000" />
+      <workItem from="1712645167638" duration="1869000" />
+      <workItem from="1712659010943" duration="86000" />
+      <workItem from="1712663910596" duration="3780000" />
+      <workItem from="1712729028503" duration="10993000" />
+      <workItem from="1712756913861" duration="3474000" />
     </task>
     <task id="LOCAL−00001" summary="first push">
       <option name="closed" value="true" />
@@ -98,7 +130,14 @@
       <option name="presentableId" value="LOCAL−00002" />
       <updated>1712582861610</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL−00003" summary="changed name of folder">
+      <option name="closed" value="true" />
+      <created>1712601422944</created>
+      <option name="number" value="LOCAL−00003" />
+      <option name="presentableId" value="LOCAL−00003" />
+      <updated>1712601422944</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -107,6 +146,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="first push" />
     <MESSAGE value="added classes and images for pieces" />
-    <option name="LAST_COMMIT_MESSAGE" value="added classes and images for pieces" />
+    <MESSAGE value="changed name of folder" />
+    <option name="LAST_COMMIT_MESSAGE" value="changed name of folder" />
   </component>
 </project>

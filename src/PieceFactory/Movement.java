@@ -1,8 +1,9 @@
 package PieceFactory;
 
+import java.util.ArrayList;
+
 public interface Movement {
-    
-    int verticalMovement();
-    int horizontalMovement();
+
+    ArrayList<int[]> move(int rowPosition, int colPosition);
     
 }
