@@ -177,11 +177,11 @@ public class Client extends JFrame implements ActionListener {
                 Piece tempPiece = (Piece) buttons[row][col].getClientProperty("piece");
                 if (tempPiece != null && tempPiece.getPieceType().pieceType.equalsIgnoreCase("king") && tempPiece.getColor().equalsIgnoreCase(colorOfPlayerPieces)) {
                     kingExists = true;
-                    break; // Found the king, no need to continue searching
+                    break; 
                 }
             }
             if (kingExists) {
-                break; // Found the king, no need to continue searching
+                break; 
             }
         }
         return kingExists;
