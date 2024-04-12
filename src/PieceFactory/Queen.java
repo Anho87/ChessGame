@@ -1,5 +1,6 @@
 package PieceFactory;
 
+import javax.swing.*;
 import java.util.ArrayList;
 
 public class Queen extends Piece{
@@ -16,33 +17,42 @@ public class Queen extends Piece{
     }
 
     @Override
-    public ArrayList<int[]> move(int rowPosition, int colPosition) {
+    public ArrayList<int[]> move(JButton[][] buttons, int rowPosition, int colPosition) {
         ArrayList<int[]> availableMoves = new ArrayList<>();
-
-// Define the possible directions for a queen's move
         int[][] queenMoves = {
-                // Horizontal and vertical moves (rook-like movements)
                 {-1, 0}, {1, 0}, {0, -1}, {0, 1},
-                // Diagonal moves (bishop-like movements)
                 {-1, -1}, {-1, 1}, {1, -1}, {1, 1}
         };
 
-// Iterate over each possible move direction
+
         for (int[] move : queenMoves) {
             int newRow = rowPosition + move[0];
             int newCol = colPosition + move[1];
 
-            // Continue in the same direction until reaching the board's edge
-            while (newRow >= 0 && newRow < 8 && newCol >= 0 && newCol < 8) {
-                // Add the move to the availableMoves list
-                availableMoves.add(new int[]{newRow, newCol});
+            while (isValidPosition(newRow, newCol)) {
+                Piece piece = (Piece) buttons[newRow][newCol].getClientProperty("piece");
+                if (piece == null) {
+                    availableMoves.add(new int[]{newRow, newCol});
+                } else {
+                    if (isOpponentPiece(piece)) {
+                        availableMoves.add(new int[]{newRow, newCol});
+                    }
+                    break;
+                }
                 newRow += move[0];
                 newCol += move[1];
             }
         }
-
-
         return availableMoves;
-
     }
+
+    private boolean isValidPosition(int row, int col) {
+        return row >= 0 && row < 8 && col >= 0 && col < 8;
+    }
+
+    private boolean isOpponentPiece(Piece piece) {
+        String pieceColor = piece.getColor();
+        return !pieceColor.equalsIgnoreCase(getColor());
+    }
+
 }

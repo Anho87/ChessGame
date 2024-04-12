@@ -126,17 +126,6 @@ public class BoardPanel {
                 buttons[7][i].setIcon(blackIcon);
                 buttons[7][i].putClientProperty("color", storedBlackPiece.getColor());
                 buttons[7][i].putClientProperty("pieceType", storedBlackPiece.getPieceType().pieceType);
-                
-//                ImageIcon whiteIcon = scaleImageIcon(new ImageIcon(ImageIO.read(new File(whitePieces.get(i).getimgPath()))));
-//                ImageIcon blackIcon = scaleImageIcon(new ImageIcon(ImageIO.read(new File(blackPieces.get(i).getimgPath()))));
-//
-//                buttons[0][i].setIcon(whiteIcon);
-//                buttons[0][i].putClientProperty("color", whitePieces.get(i).getColor());
-//                buttons[0][i].putClientProperty("pieceType", whitePieces.get(i).getPieceType().pieceType);
-//
-//                buttons[7][i].setIcon(blackIcon);
-//                buttons[7][i].putClientProperty("color", blackPieces.get(i).getColor());
-//                buttons[7][i].putClientProperty("pieceType", blackPieces.get(i).getPieceType().pieceType);
             }
 
             for (int i = 0; i < 8; i++) {
@@ -154,18 +143,6 @@ public class BoardPanel {
                 buttons[6][i].setIcon(blackIcon);
                 buttons[6][i].putClientProperty("color", storedBlackPiece.getColor());
                 buttons[6][i].putClientProperty("pieceType", storedBlackPiece.getPieceType().pieceType);
-                
-                
-//                ImageIcon whitePawnIcon = scaleImageIcon(new ImageIcon(ImageIO.read(new File(whitePieces.get(8).getimgPath()))));
-//                ImageIcon blackPawnIcon = scaleImageIcon(new ImageIcon(ImageIO.read(new File(blackPieces.get(8).getimgPath()))));
-//
-//                buttons[1][i].setIcon(whitePawnIcon);
-//                buttons[1][i].putClientProperty("color", whitePieces.get(8).getColor());
-//                buttons[1][i].putClientProperty("pieceType", whitePieces.get(8).getPieceType().pieceType);
-//
-//                buttons[6][i].setIcon(blackPawnIcon);
-//                buttons[6][i].putClientProperty("color", blackPieces.get(8).getColor());
-//                buttons[6][i].putClientProperty("pieceType", blackPieces.get(8).getPieceType().pieceType);
             }
         } catch (IOException e) {
             e.printStackTrace();

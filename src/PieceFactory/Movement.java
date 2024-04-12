@@ -1,9 +1,10 @@
 package PieceFactory;
 
+import javax.swing.*;
 import java.util.ArrayList;
 
 public interface Movement {
 
-    ArrayList<int[]> move(int rowPosition, int colPosition);
+    ArrayList<int[]> move(JButton[][] buttons, int rowPosition, int colPosition);
     
 }

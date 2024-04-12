@@ -1,5 +1,6 @@
 package PieceFactory;
 
+import javax.swing.*;
 import java.util.ArrayList;
 
 public class Rook extends Piece{
@@ -16,18 +17,66 @@ public class Rook extends Piece{
     }
 
     @Override
-    public ArrayList<int[]> move(int rowPosition, int colPosition) {
+    public ArrayList<int[]> move(JButton[][] buttons, int rowPosition, int colPosition) {
         ArrayList<int[]> availableMoves = new ArrayList<>();
-        for (int col = 0; col < 8; col++) {
-            if (col != colPosition) { // Exclude the current column
-                availableMoves.add(new int[]{rowPosition, col}); // Add horizontal move
+        
+        for (int col = colPosition + 1; col < 8; col++) {
+            Piece piece = (Piece) buttons[rowPosition][col].getClientProperty("piece");
+            if (piece == null) {
+                availableMoves.add(new int[]{rowPosition, col});
+            } else if (isOpponentPiece(piece)) {
+                availableMoves.add(new int[]{rowPosition, col});
+                break;
+            } else {
+                break; 
             }
         }
-        for (int row = 0; row < 8; row++) {
-            if (row != rowPosition) { // Exclude the current row
-                availableMoves.add(new int[]{row, colPosition}); // Add vertical move
+        for (int col = colPosition - 1; col >= 0; col--) {
+            Piece piece = (Piece) buttons[rowPosition][col].getClientProperty("piece");
+            if (piece == null) {
+                availableMoves.add(new int[]{rowPosition, col});
+            } else if (isOpponentPiece(piece)) {
+                availableMoves.add(new int[]{rowPosition, col});
+                break;
+            } else {
+                break;
             }
         }
+
+        for (int row = rowPosition - 1; row >= 0; row--) {
+            Piece piece = (Piece) buttons[row][colPosition].getClientProperty("piece");
+            if (piece == null) {
+                availableMoves.add(new int[]{row, colPosition});
+            } else if (isOpponentPiece(piece)) {
+                availableMoves.add(new int[]{row, colPosition});
+                break;
+            } else {
+                break; 
+            }
+        }
+
+        for (int row = rowPosition + 1; row < 8; row++) {
+            Piece piece = (Piece) buttons[row][colPosition].getClientProperty("piece");
+            if (piece == null) {
+                availableMoves.add(new int[]{row, colPosition});
+            } else if (isOpponentPiece(piece)) {
+                availableMoves.add(new int[]{row, colPosition});
+                break;
+            } else {
+                break; 
+            }
+        }
+
         return availableMoves;
+    }
+
+
+    private boolean isValidPosition(int row, int col) {
+        return row >= 0 && row < 8 && col >= 0 && col < 8;
+    }
+
+    private boolean isOpponentPiece(Piece piece) {
+        String pieceColor = piece.getColor();
+        return !pieceColor.equalsIgnoreCase(getColor());
     }
 }

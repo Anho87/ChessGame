@@ -1,5 +1,6 @@
 package PieceFactory;
 
+import javax.swing.*;
 import java.util.ArrayList;
 
 public class King extends Piece{
@@ -16,29 +17,34 @@ public class King extends Piece{
     }
 
     @Override
-    public ArrayList<int[]> move(int rowPosition, int colPosition) {
+    public ArrayList<int[]> move(JButton[][] buttons, int rowPosition, int colPosition) {
         ArrayList<int[]> availableMoves = new ArrayList<>();
 
-// Define the possible directions for a king's move
         int[][] kingMoves = {
                 {1, 0}, {1, 1}, {0, 1}, {-1, 1},
                 {-1, 0}, {-1, -1}, {0, -1}, {1, -1}
         };
-
-// Iterate over each possible move direction
+        
         for (int[] move : kingMoves) {
             int newRow = rowPosition + move[0];
             int newCol = colPosition + move[1];
-
-            // Check if the new position is within the bounds of the board
-            if (newRow >= 0 && newRow < 8 && newCol >= 0 && newCol < 8) {
-                // Add the move to the availableMoves list
-                availableMoves.add(new int[]{newRow, newCol});
+            if (isValidPosition(newRow, newCol)) {
+                Piece piece = (Piece) buttons[newRow][newCol].getClientProperty("piece");
+                if (piece == null || isOpponentPiece(piece)) {
+                    availableMoves.add(new int[]{newRow, newCol});
+                }
             }
         }
-
-
         return availableMoves;
-
     }
+
+    private boolean isValidPosition(int row, int col) {
+        return row >= 0 && row < 8 && col >= 0 && col < 8;
+    }
+
+    private boolean isOpponentPiece(Piece piece) {
+        String pieceColor = piece.getColor();
+        return !pieceColor.equalsIgnoreCase(getColor());
+    }
+
 }

@@ -56,9 +56,30 @@ public class Server extends Thread{
                 System.out.println("Round nr " + round+ " black players turn");
                 turn(outPlayer2,inPlayer2,outPlayer1,inPlayer1);
             }
+            checkIfSomeoneWon();
         }
     }
-    
+
+    private void checkIfSomeoneWon()  {
+        outPlayer1.println("kingDead?");
+        outPlayer2.println("kingDead?");
+        try {
+            String whitePlayerKingAlive = inPlayer1.readLine();
+            System.out.println("whiteplayer king is " + whitePlayerKingAlive);
+            String blackPlayerKingAlive = inPlayer2.readLine();
+            System.out.println("blackplayer king is " + blackPlayerKingAlive);
+            if (whitePlayerKingAlive.equalsIgnoreCase("dead")|| blackPlayerKingAlive.equalsIgnoreCase("dead")){
+                outPlayer1.println("waiting");
+                outPlayer2.println("waiting");
+                gameActive = false;
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+                
+        
+    }
+
     public void turn(PrintWriter activePlayerWriter, BufferedReader activePlayerReader, PrintWriter waitingPlayerWriter, BufferedReader waitingPlayerReader){
         activePlayerWriter.println("active");
         waitingPlayerWriter.println("waiting");

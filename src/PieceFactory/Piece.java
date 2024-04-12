@@ -1,5 +1,8 @@
 package PieceFactory;
 
+import javax.swing.*;
+import java.util.ArrayList;
+
 public abstract class Piece implements Movement{
     
     final private String color;
@@ -20,7 +23,4 @@ public abstract class Piece implements Movement{
     }
 
     public abstract PieceType getPieceType();
-    
-    
-   
 }

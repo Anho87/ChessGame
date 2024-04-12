@@ -13,14 +13,15 @@ import java.net.*;
 import java.util.ArrayList;
 
 public class Client extends JFrame implements ActionListener {
-    JPanel northPanel = new JPanel();
+    //    JPanel northPanel = new JPanel();
     JPanel boardJPanel = new JPanel();
-    JButton newGameButton = new JButton("New Game");
-    JButton exitButton = new JButton("Exit");
+    //    JButton newGameButton = new JButton("New Game");
+//    JButton exitButton = new JButton("Exit");
     JButton[][] buttons = new JButton[8][8];
     private static JButton sourceButton = null;
     BoardPanel bp;
     String playerColor;
+    String colorOfPlayerPieces;
     String ip = "127.0.0.1";
     int inPort = 22222;
 
@@ -66,18 +67,29 @@ public class Client extends JFrame implements ActionListener {
                 System.out.println("player ready");
                 playerColor = in.readLine();
                 setTitle(playerColor);
+                colorOfPlayerPieces = playerColor.equalsIgnoreCase("White Player") ? "white" : "black";
                 outToServer.println("Player ready");
             } else if (fromServer.equalsIgnoreCase("player move")) {
                 System.out.println("player move");
                 bp.movePiece(in.readLine());
+            } else if (fromServer.equalsIgnoreCase("kingDead?")) {
+                boolean exists = checkIfKingIsDead();
+                if (exists){
+                    System.out.println("alive");
+                    outToServer.println("alive");
+                }else{
+                    System.out.println("dead");
+                    outToServer.println("dead");
+                }
             }
         }
     }
+    
 
     public void setupGameBoard() {
         setLayout(new BorderLayout());
-        northPanel.add(newGameButton);
-        northPanel.add(exitButton);
+//        northPanel.add(newGameButton);
+//        northPanel.add(exitButton);
 
         bp = new BoardPanel(boardJPanel, buttons);
 
@@ -89,9 +101,9 @@ public class Client extends JFrame implements ActionListener {
         }
 
         add(boardJPanel);
-        exitButton.addActionListener(e -> System.exit(0));
-        newGameButton.addActionListener(e -> outToServer.println("NewGame"));
-        add(northPanel, BorderLayout.NORTH);
+//        exitButton.addActionListener(e -> System.exit(0));
+//        newGameButton.addActionListener(e -> outToServer.println("NewGame"));
+//        add(northPanel, BorderLayout.NORTH);
         setTitle("Chess");
         setLocationRelativeTo(null);
         pack();
@@ -125,6 +137,8 @@ public class Client extends JFrame implements ActionListener {
                 }
                 if (checkPieceAndPlayerColor()) {
                     checkPossiblePlay(clickedRow, clickedCol);
+                } else {
+                    sourceButton = null;
                 }
             }
         } else {
@@ -140,151 +154,58 @@ public class Client extends JFrame implements ActionListener {
                 }
             }
             if (checkPieceAndPlayerColor()) {
-                if (clickedButton == sourceButton) { 
+                if (clickedButton == sourceButton) {
                     bp.resetButtonColors();
                 } else {
                     Color checkBackgroundColor = clickedButton.getBackground();
-                    if (checkBackgroundColor.equals(lightBlue))
-                    makeMove(clickedRow, clickedCol, sourceRow, sourceCol);
-                    bp.resetButtonColors(); 
+                    if (checkBackgroundColor.equals(lightBlue)) {
+                        makeMove(clickedRow, clickedCol, sourceRow, sourceCol);
+                        bp.resetButtonColors();
+                    } else {
+                        bp.resetButtonColors();
+                    }
                 }
             }
             sourceButton = null;
         }
     }
 
-    public void checkPossiblePlay(int rowPosition, int colPosition) {
-        if (rowPosition >= 0 && rowPosition < buttons.length) { 
-//            String buttonTypeProperty = (String) sourceButton.getClientProperty("pieceType");
-            Piece sourceObject = (Piece) sourceButton.getClientProperty("piece");
-            sourceButton.setBorder(new LineBorder(green, 3));
-            ArrayList<int[]> availableMoves;
-            if (sourceObject != null) {
-                availableMoves = sourceObject.move(rowPosition,colPosition);
-                paintButtonBackgroundWithAvailableMoves(availableMoves);
-//                switch (buttonTypeProperty) {
-//                    case "Rook": {
-//                        availableMoves = sourceObject.move(rowPosition,colPosition);
-//                        paintButtonBackgroundWithAvailableMoves(availableMoves);
-////                        highlightRookMoves(rowPosition, colPosition);
-//                        break;
-//                    }
-//                    case "Knight": {
-//                        availableMoves = sourceObject.move(rowPosition,colPosition);
-//                        paintButtonBackgroundWithAvailableMoves(availableMoves);
-////                        highlightKnightMoves(rowPosition, colPosition);
-//                        break;
-//                    }
-//                    case "Bishop": {
-//                        highlightBishopMoves(rowPosition, colPosition);
-//                        break;
-//                    }
-//                    case "Queen":{
-//                        highlightQueenMoves(rowPosition,colPosition);
-//                        break;
-//                    }
-//                    case "King":{
-//                        highlightKingMoves(rowPosition, colPosition);
-//                        break;
-//                    }
-//                    case "Pawn":{
-//                        highlightPawnMoves(rowPosition, colPosition);
-//                        break;
-//                    }
-//                }
+    private boolean checkIfKingIsDead() {
+        boolean kingExists = false;
+        for (int row = 0; row < buttons.length; row++) {
+            for (int col = 0; col < buttons[row].length; col++) {
+                Piece tempPiece = (Piece) buttons[row][col].getClientProperty("piece");
+                if (tempPiece != null && tempPiece.getPieceType().pieceType.equalsIgnoreCase("king") && tempPiece.getColor().equalsIgnoreCase(colorOfPlayerPieces)) {
+                    kingExists = true;
+                    break; // Found the king, no need to continue searching
+                }
             }
-        } else {
-            System.out.println("Invalid rowPosition: " + rowPosition);
+            if (kingExists) {
+                break; // Found the king, no need to continue searching
+            }
+        }
+        return kingExists;
+    }
+
+
+    public void checkPossiblePlay(int rowPosition, int colPosition) {
+        Piece sourceObject = (Piece) sourceButton.getClientProperty("piece");
+        sourceButton.setBorder(new LineBorder(green, 3));
+        if (sourceObject != null) {
+            ArrayList<int[]> availableMoves = sourceObject.move(buttons,rowPosition, colPosition);
+            paintButtonBackgroundWithAvailableMoves(availableMoves);
         }
     }
-    
-    private void paintButtonBackgroundWithAvailableMoves(ArrayList<int[]> availableMoves){
+
+    private void paintButtonBackgroundWithAvailableMoves(ArrayList<int[]> availableMoves) {
         for (int[] move : availableMoves) {
             int row = move[0];
             int col = move[1];
-
-            if (row >= 0 && row < buttons.length && col >= 0 && col < buttons[0].length) {
-                buttons[row][col].setBackground(lightBlue); 
-            }
+            buttons[row][col].setBackground(lightBlue);
         }
     }
 
-//    private void highlightBishopMoves(int rowPosition, int colPosition) {
-//        int[][] bishopDirections = {{-1, -1}, {-1, 1}, {1, -1}, {1, 1}};
-//
-//        for (int[] direction : bishopDirections) {
-//            int newRow = rowPosition + direction[0];
-//            int newCol = colPosition + direction[1];
-//
-//            while (newRow >= 0 && newRow < buttons.length && newCol >= 0 && newCol < buttons[0].length) {
-//                buttons[newRow][newCol].setBackground(lightBlue);
-//                newRow += direction[0];
-//                newCol += direction[1];
-//            }
-//        }
-//    }
-//    private void highlightQueenMoves(int rowPosition, int colPosition) {
-//        highlightRookMoves(rowPosition, colPosition);
-//        highlightBishopMoves(rowPosition, colPosition);
-//    }
-//    private void highlightKingMoves(int rowPosition, int colPosition) {
-//        int[][] kingMoves = {{-1, -1}, {-1, 0}, {-1, 1}, {0, -1}, {0, 1}, {1, -1}, {1, 0}, {1, 1}};
-//
-//        for (int[] move : kingMoves) {
-//            int newRow = rowPosition + move[0];
-//            int newCol = colPosition + move[1];
-//
-//            if (newRow >= 0 && newRow < buttons.length && newCol >= 0 && newCol < buttons[0].length) {
-//                buttons[newRow][newCol].setBackground(lightBlue);
-//            }
-//        }
-//    }
-//    private void highlightPawnMoves(int rowPosition, int colPosition) {
-//        int direction = (playerColor.equalsIgnoreCase("White Player")) ? 1 : -1;
-//
-//        int newRow = rowPosition + direction;
-//        int newCol = colPosition;
-//        if (newRow >= 0 && newRow < buttons.length && newCol >= 0 && newCol < buttons[0].length) {
-//            buttons[newRow][newCol].setBackground(lightBlue);
-//        }
-//
-//        int[][] pawnDiagonalMoves = {{direction, -1}, {direction, 1}};
-//        for (int[] move : pawnDiagonalMoves) {
-//            newRow = rowPosition + move[0];
-//            newCol = colPosition + move[1];
-//            if (newRow >= 0 && newRow < buttons.length && newCol >= 0 && newCol < buttons[0].length) {
-//                buttons[newRow][newCol].setBackground(lightBlue);
-//            }
-//        }
-//    }
-
-//    private void highlightKnightMoves(int rowPosition, int colPosition) {
-//        int[][] knightMoves = {{-2, -1}, {-2, 1}, {-1, -2}, {-1, 2}, {1, -2}, {1, 2}, {2, -1}, {2, 1}};
-//
-//        for (int[] move : knightMoves) {
-//            int newRow = rowPosition + move[0];
-//            int newCol = colPosition + move[1];
-//
-//            if (newRow >= 0 && newRow < buttons.length && newCol >= 0 && newCol < buttons[0].length) {
-//                buttons[newRow][newCol].setBackground(lightBlue);
-//            }
-//        }
-//    }
-
-//    private void highlightRookMoves(int rowPosition, int colPosition) {
-//        for (int col = 0; col < buttons[rowPosition].length; col++) {
-//            if (col != colPosition) {
-//                buttons[rowPosition][col].setBackground(lightBlue);
-//            }
-//        }
-//        for (int row = 0; row < buttons.length; row++) {
-//            if (row != rowPosition) {
-//                buttons[row][colPosition].setBackground(lightBlue);
-//            }
-//        }
-//    }
-    
-    public void makeMove(int clickedRow, int clickedCol, int sourceRow, int sourceCol){
+    public void makeMove(int clickedRow, int clickedCol, int sourceRow, int sourceCol) {
         System.out.println(clickedRow + "," + clickedCol + " " + sourceRow + "," + sourceCol);
         bp.movePiece(clickedRow + "," + clickedCol + " " + sourceRow + "," + sourceCol);
         outToServer.println(clickedRow + "," + clickedCol + " " + sourceRow + "," + sourceCol);
@@ -295,7 +216,6 @@ public class Client extends JFrame implements ActionListener {
         if (buttonColorProperty == null) {
             return false;
         }
-        String colorOfPlayerPieces = playerColor.equalsIgnoreCase("White Player") ? "white" : "black";
         return buttonColorProperty.contains(colorOfPlayerPieces);
     }
 

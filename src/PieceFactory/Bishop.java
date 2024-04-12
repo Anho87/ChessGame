@@ -1,5 +1,6 @@
 package PieceFactory;
 
+import javax.swing.*;
 import java.util.ArrayList;
 
 public class Bishop extends Piece{
@@ -16,54 +17,43 @@ public class Bishop extends Piece{
     }
 
     @Override
-    public ArrayList<int[]> move(int rowPosition, int colPosition) {
+    public ArrayList<int[]> move(JButton[][] buttons, int rowPosition, int colPosition) {
         ArrayList<int[]> availableMoves = new ArrayList<>();
+        int[][] directions = { {1, 1}, {1, -1}, {-1, 1}, {-1, -1} };
 
-// Check for moves along the main diagonal (from top-left to bottom-right)
-        for (int i = 1; i < 8; i++) {
-            int newRow = rowPosition + i;
-            int newCol = colPosition + i;
-            if (newRow < 8 && newCol < 8) {
-                availableMoves.add(new int[]{newRow, newCol});
-            } else {
-                break; // Stop if out of bounds
+        for (int[] direction : directions) {
+            int rowDir = direction[0];
+            int colDir = direction[1];
+
+            for (int i = 1; i < 8; i++) {
+                int newRow = rowPosition + (i * rowDir);
+                int newCol = colPosition + (i * colDir);
+                if (isValidPosition(newRow, newCol)) {
+                    Piece piece = (Piece) buttons[newRow][newCol].getClientProperty("piece");
+                    if (piece == null) {
+                        availableMoves.add(new int[]{newRow, newCol});
+                    } else {
+                        if (isOpponentPiece(piece)) {
+                            availableMoves.add(new int[]{newRow, newCol});
+                        }
+                        break;
+                    }
+                } else {
+                    break;
+                }
             }
         }
-
-// Check for moves along the anti-diagonal (from top-right to bottom-left)
-        for (int i = 1; i < 8; i++) {
-            int newRow = rowPosition + i;
-            int newCol = colPosition - i;
-            if (newRow < 8 && newCol >= 0) {
-                availableMoves.add(new int[]{newRow, newCol});
-            } else {
-                break; // Stop if out of bounds
-            }
-        }
-
-// Check for moves along the anti-diagonal (from bottom-left to top-right)
-        for (int i = 1; i < 8; i++) {
-            int newRow = rowPosition - i;
-            int newCol = colPosition + i;
-            if (newRow >= 0 && newCol < 8) {
-                availableMoves.add(new int[]{newRow, newCol});
-            } else {
-                break; // Stop if out of bounds
-            }
-        }
-
-// Check for moves along the main diagonal (from bottom-right to top-left)
-        for (int i = 1; i < 8; i++) {
-            int newRow = rowPosition - i;
-            int newCol = colPosition - i;
-            if (newRow >= 0 && newCol >= 0) {
-                availableMoves.add(new int[]{newRow, newCol});
-            } else {
-                break; // Stop if out of bounds
-            }
-        }
-
         return availableMoves;
-
     }
+
+    private boolean isValidPosition(int row, int col) {
+        return row >= 0 && row < 8 && col >= 0 && col < 8;
+    }
+
+    private boolean isOpponentPiece(Piece piece) {
+        String pieceColor = piece.getColor();
+        return !pieceColor.equalsIgnoreCase(getColor());
+    }
+
+
 }
