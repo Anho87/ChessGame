@@ -13,10 +13,8 @@ import java.net.*;
 import java.util.ArrayList;
 
 public class Client extends JFrame implements ActionListener {
-    //    JPanel northPanel = new JPanel();
+    JPanel northPanel = new JPanel();
     JPanel boardJPanel = new JPanel();
-    //    JButton newGameButton = new JButton("New Game");
-//    JButton exitButton = new JButton("Exit");
     JButton[][] buttons = new JButton[8][8];
     private static JButton sourceButton = null;
     BoardPanel bp;
@@ -40,6 +38,27 @@ public class Client extends JFrame implements ActionListener {
                 button.setDisabledIcon(button.getIcon());
             }
         }
+    }
+    public void setupGameBoard() {
+        setLayout(new BorderLayout());
+
+        bp = new BoardPanel(boardJPanel, buttons);
+
+        for (int row = 0; row < buttons.length; row++) {
+            for (int col = 0; col < buttons[row].length; col++) {
+                JButton button = buttons[row][col];
+                button.addActionListener(this);
+            }
+        }
+
+        add(boardJPanel);
+        add(northPanel, BorderLayout.NORTH);
+        setTitle("Chess");
+        setLocationRelativeTo(null);
+        pack();
+        setResizable(false);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setVisible(true);
     }
 
     public void game() throws IOException {
@@ -73,46 +92,19 @@ public class Client extends JFrame implements ActionListener {
                 System.out.println("player move");
                 bp.movePiece(in.readLine());
             } else if (fromServer.equalsIgnoreCase("kingDead?")) {
-                boolean exists = checkIfKingIsDead();
-                if (exists){
+                if (checkIfKingIsDead()){
                     System.out.println("alive");
                     outToServer.println("alive");
                 }else{
                     System.out.println("dead");
                     outToServer.println("dead");
                 }
+            } else if (fromServer.equalsIgnoreCase("game over")) {
+                gameOverScreen();
             }
         }
     }
     
-
-    public void setupGameBoard() {
-        setLayout(new BorderLayout());
-//        northPanel.add(newGameButton);
-//        northPanel.add(exitButton);
-
-        bp = new BoardPanel(boardJPanel, buttons);
-
-        for (int row = 0; row < buttons.length; row++) {
-            for (int col = 0; col < buttons[row].length; col++) {
-                JButton button = buttons[row][col];
-                button.addActionListener(this);
-            }
-        }
-
-        add(boardJPanel);
-//        exitButton.addActionListener(e -> System.exit(0));
-//        newGameButton.addActionListener(e -> outToServer.println("NewGame"));
-//        add(northPanel, BorderLayout.NORTH);
-        setTitle("Chess");
-        setLocationRelativeTo(null);
-        pack();
-        setResizable(false);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setVisible(true);
-    }
-
-
     @Override
     public void actionPerformed(ActionEvent e) {
         JButton clickedButton = (JButton) e.getSource();
@@ -168,6 +160,22 @@ public class Client extends JFrame implements ActionListener {
             }
             sourceButton = null;
         }
+    }
+
+    private void gameOverScreen() {
+        if(checkIfKingIsDead()){
+            addWinLosePic("win");
+        }else {
+            addWinLosePic("lose");
+        }
+    }
+
+    public void addWinLosePic(String condition){
+        ImageIcon icon = new ImageIcon("src/images/you_" + condition + ".jpg");
+        JLabel iconLabel = new JLabel(icon);
+        northPanel.add(iconLabel);
+        northPanel.revalidate();
+        northPanel.repaint();
     }
 
     private boolean checkIfKingIsDead() {

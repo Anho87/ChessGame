@@ -4,19 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="61a5c2bb-6518-4029-b471-97904a6e4c74" name="Changes" comment="added background and restrictions to buttons and movement">
+    <list default="true" id="61a5c2bb-6518-4029-b471-97904a6e4c74" name="Changes" comment="added movement and rules to the specific subclasses and also added a win condition">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/BoardPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BoardPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PieceFactory/Bishop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PieceFactory/Bishop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PieceFactory/Color.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PieceFactory/King.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PieceFactory/King.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PieceFactory/Knight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PieceFactory/Knight.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PieceFactory/Movement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PieceFactory/Movement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PieceFactory/Pawn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PieceFactory/Pawn.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PieceFactory/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PieceFactory/Piece.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PieceFactory/Queen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PieceFactory/Queen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PieceFactory/Rook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PieceFactory/Rook.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -27,9 +18,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Enum" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -110,7 +101,14 @@
       <workItem from="1712834530870" duration="2538000" />
       <workItem from="1712861447336" duration="671000" />
       <workItem from="1712903835529" duration="1451000" />
-      <workItem from="1712912969061" duration="5849000" />
+      <workItem from="1712912969061" duration="6439000" />
+      <workItem from="1712925173242" duration="115000" />
+      <workItem from="1713172103070" duration="4669000" />
+      <workItem from="1713267444806" duration="161000" />
+      <workItem from="1713774390412" duration="259000" />
+      <workItem from="1725530230236" duration="116000" />
+      <workItem from="1725966693522" duration="30000" />
+      <workItem from="1729363264918" duration="351000" />
     </task>
     <task id="LOCAL−00001" summary="first push">
       <option name="closed" value="true" />
@@ -140,7 +138,21 @@
       <option name="presentableId" value="LOCAL−00004" />
       <updated>1712760740981</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL−00005" summary="added movement and rules to the specific subclasses and also added a win condition">
+      <option name="closed" value="true" />
+      <created>1712919313741</created>
+      <option name="number" value="LOCAL−00005" />
+      <option name="presentableId" value="LOCAL−00005" />
+      <updated>1712919313741</updated>
+    </task>
+    <task id="LOCAL−00006" summary="added movement and rules to the specific subclasses and also added a win condition">
+      <option name="closed" value="true" />
+      <created>1712919466607</created>
+      <option name="number" value="LOCAL−00006" />
+      <option name="presentableId" value="LOCAL−00006" />
+      <updated>1712919466607</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -151,6 +163,7 @@
     <MESSAGE value="added classes and images for pieces" />
     <MESSAGE value="changed name of folder" />
     <MESSAGE value="added background and restrictions to buttons and movement" />
-    <option name="LAST_COMMIT_MESSAGE" value="added background and restrictions to buttons and movement" />
+    <MESSAGE value="added movement and rules to the specific subclasses and also added a win condition" />
+    <option name="LAST_COMMIT_MESSAGE" value="added movement and rules to the specific subclasses and also added a win condition" />
   </component>
 </project>

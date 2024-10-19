@@ -8,19 +8,16 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class BoardPanel {
+public class BoardPanel{
     JPanel bp;
     int rowLength = 8;
     int columLength = 8;
     JButton[][] buttons;
-
     Color[][] originalButtonColors = new Color[8][8];
     Color lightBrown = new Color(102, 51, 0);
     Color darkBrown = new Color(153, 102, 0);
-
     private static final int DESIRED_WIDTH = 50;
     private static final int DESIRED_HEIGHT = 50;
-
     PieceFactory pieceFactory = new PieceFactory();
     ArrayList<Piece> whitePieces;
     ArrayList<Piece> blackPieces;
@@ -71,8 +68,7 @@ public class BoardPanel {
         addButtonsToPanel();
         setStartingPositions();
     }
-
-
+    
     public void movePiece(String movePieces) {
         String[] parts = movePieces.split(" ");
         if (parts.length >= 2) {

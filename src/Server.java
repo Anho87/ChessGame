@@ -1,4 +1,3 @@
-import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -60,6 +59,11 @@ public class Server extends Thread{
         }
     }
 
+    private void WhenSomeoneWon() {
+        outPlayer1.println("game over");
+        outPlayer2.println("game over");
+    }
+
     private void checkIfSomeoneWon()  {
         outPlayer1.println("kingDead?");
         outPlayer2.println("kingDead?");
@@ -72,12 +76,11 @@ public class Server extends Thread{
                 outPlayer1.println("waiting");
                 outPlayer2.println("waiting");
                 gameActive = false;
+                WhenSomeoneWon();
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-                
-        
     }
 
     public void turn(PrintWriter activePlayerWriter, BufferedReader activePlayerReader, PrintWriter waitingPlayerWriter, BufferedReader waitingPlayerReader){
