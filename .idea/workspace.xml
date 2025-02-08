@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="ANALYZE_INJECTED_CODE" value="false" />
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="61a5c2bb-6518-4029-b471-97904a6e4c74" name="Changes" comment="added movement and rules to the specific subclasses and also added a win condition">
+    <list default="true" id="61a5c2bb-6518-4029-b471-97904a6e4c74" name="Changes" comment="added win/lose screens">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BoardPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BoardPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ServerListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ServerListener.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,6 +28,12 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
@@ -47,6 +55,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
@@ -108,7 +117,12 @@
       <workItem from="1713774390412" duration="259000" />
       <workItem from="1725530230236" duration="116000" />
       <workItem from="1725966693522" duration="30000" />
-      <workItem from="1729363264918" duration="351000" />
+      <workItem from="1729363264918" duration="695000" />
+      <workItem from="1729761463884" duration="48000" />
+      <workItem from="1731526910785" duration="606000" />
+      <workItem from="1731613845005" duration="39000" />
+      <workItem from="1738913201966" duration="387000" />
+      <workItem from="1739009313750" duration="732000" />
     </task>
     <task id="LOCAL−00001" summary="first push">
       <option name="closed" value="true" />
@@ -152,7 +166,14 @@
       <option name="presentableId" value="LOCAL−00006" />
       <updated>1712919466607</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL−00007" summary="added win/lose screens">
+      <option name="closed" value="true" />
+      <created>1729363950065</created>
+      <option name="number" value="LOCAL−00007" />
+      <option name="presentableId" value="LOCAL−00007" />
+      <updated>1729363950065</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -164,6 +185,7 @@
     <MESSAGE value="changed name of folder" />
     <MESSAGE value="added background and restrictions to buttons and movement" />
     <MESSAGE value="added movement and rules to the specific subclasses and also added a win condition" />
-    <option name="LAST_COMMIT_MESSAGE" value="added movement and rules to the specific subclasses and also added a win condition" />
+    <MESSAGE value="added win/lose screens" />
+    <option name="LAST_COMMIT_MESSAGE" value="added win/lose screens" />
   </component>
 </project>
